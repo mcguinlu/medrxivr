@@ -82,7 +82,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="medrxivr_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Get started</h1>
@@ -97,11 +97,130 @@
 
     
     
-
+<div id="download-the-most-recent-datadump" class="section level2">
+<h2 class="hasAnchor">
+<a href="#download-the-most-recent-datadump" class="anchor"></a>Download the most recent datadump</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(medrxivr)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">mx_all_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="st">"*"</span>)</a></code></pre></div>
+</div>
+<div id="dataset-description" class="section level2">
+<h2 class="hasAnchor">
+<a href="#dataset-description" class="anchor"></a>Dataset description</h2>
+<p>The dataset contains 12 variables:</p>
+<table class="table table">
+<thead><tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+title
+</td>
+<td style="text-align:left;width: 30em; ">
+Preprint title
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+abstract
+</td>
+<td style="text-align:left;width: 30em; ">
+Preprint abstract
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+link
+</td>
+<td style="text-align:left;width: 30em; ">
+Link to preprint webpage. Note, this only specifes the file path from the base medRxiv url (<a href="https://www.medrxiv.org" class="uri">https://www.medrxiv.org</a>), e.g “/content/10.1101/19012377v1?versioned=TRUE”. The “?versioned=TRUE” is required, as otherwise, the URL will resolve to the most recent version of the article (assuming there is &gt;1 version available).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+pdf
+</td>
+<td style="text-align:left;width: 30em; ">
+Link to preprint PDF. At present, only the most recent version of the PDF is returned in <code><a href="../reference/mx_download.html">mx_download()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+date
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+subject
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+authors
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+bibtex
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+id
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+pdf_name
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+extraction_date
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+node
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
 
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#download-the-most-recent-datadump">Download the most recent datadump</a></li>
+      <li><a href="#dataset-description">Dataset description</a></li>
+      </ul>
+</div>
       </div>
 
 </div>
