@@ -132,7 +132,13 @@
     <p>Search medRxiv using a string</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mx_search</span>(<span class='no'>query</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>NOT</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>deduplicate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>mx_search</span>(
+  <span class='no'>query</span>,
+  <span class='kw'>from.date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>to.date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>NOT</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>deduplicate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,8 +148,16 @@
       <td><p>Character string, vector or list</p></td>
     </tr>
     <tr>
-      <th>limit</th>
-      <td><p>The number of results to return</p></td>
+      <th>from.date</th>
+      <td><p>Defines earlist date of interest. Written as a number in
+format YYYYMMDD. Note, records published on the date specified will also be
+returned.</p></td>
+    </tr>
+    <tr>
+      <th>to.date</th>
+      <td><p>Defines latest date of interest. Written as a number in
+format YYYYMMDD. Note, records published on the date specified will also be
+returned.</p></td>
     </tr>
     <tr>
       <th>NOT</th>
@@ -153,7 +167,7 @@ is NULL.</p></td>
     <tr>
       <th>deduplicate</th>
       <td><p>Logical. Only return the most recent version of a record.
-Default is TRUE</p></td>
+Default is TRUE.</p></td>
     </tr>
     </table>
 
