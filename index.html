@@ -126,8 +126,8 @@
 <a class="sourceLine" id="cb5-6" data-line-number="6">mx_results &lt;-<span class="st"> </span><span class="kw"><a href="reference/mx_search.html">mx_search</a></span>(myquery)</a></code></pre></div>
 <p>To limit by date posted on medRxiv:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">mx_results &lt;-<span class="st"> </span><span class="kw"><a href="reference/mx_search.html">mx_search</a></span>(<span class="st">"dementia"</span>,</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">                        <span class="dt">from.date =</span> <span class="dv">20200101</span>,</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">                        <span class="dt">to.date =</span> <span class="dv">20200105</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb6-2" data-line-number="2">                        <span class="dt">from.date =</span> <span class="dv">20200101</span>,      <span class="co"># 1st Jan 2020</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">                        <span class="dt">to.date =</span> <span class="dv">20200105</span>)        <span class="co"># 5th Jan 2020</span></a></code></pre></div>
 <p>To exclude records containing certain terms:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">mx_results &lt;-<span class="st"> </span><span class="kw"><a href="reference/mx_search.html">mx_search</a></span>(<span class="st">"dementia"</span>,</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">                        <span class="dt">NOT =</span> <span class="st">"MCI"</span>)</a></code></pre></div>
@@ -138,7 +138,7 @@
 <div id="download-pdfs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#download-pdfs" class="anchor"></a>Download PDFs</h2>
-<p>Pass the results of your search above to the <code><a href="reference/mx_download.html">mx_download()</a></code> function to download a copy of the PDF for each record. Note: PDFs are saved using the value of the <code>node</code> column in the dataset, which serves as a unique identifier for each record.</p>
+<p>Pass the results of your search above to the <code><a href="reference/mx_download.html">mx_download()</a></code> function to download a copy of the PDF for each record. Note: downloaded PDFs are named using the value of the <code>node</code> column in the dataset, which serves as a unique identifier for each record.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="reference/mx_download.html">mx_download</a></span>(mx_results,     <span class="co"># Object returned by mx_search</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3">            <span class="st">"pdf/"</span>,         <span class="co"># Directory to save PDFs to </span></a>
