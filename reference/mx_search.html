@@ -134,6 +134,7 @@
 
     <pre class="usage"><span class='fu'>mx_search</span>(
   <span class='no'>query</span>,
+  <span class='kw'>fields</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"title"</span>, <span class='st'>"abstract"</span>, <span class='st'>"authors"</span>, <span class='st'>"subject"</span>, <span class='st'>"link"</span>),
   <span class='kw'>from.date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>to.date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>NOT</span> <span class='kw'>=</span> <span class='st'>""</span>,
@@ -146,6 +147,11 @@
     <tr>
       <th>query</th>
       <td><p>Character string, vector or list</p></td>
+    </tr>
+    <tr>
+      <th>fields</th>
+      <td><p>Fields of the database to search - default is Title, Abstract,
+First author, Subject, and Link (which includes the DOI)</p></td>
     </tr>
     <tr>
       <th>from.date</th>
