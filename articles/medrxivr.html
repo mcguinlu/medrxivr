@@ -57,7 +57,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/intro-to-medrxivr.html">Introduction to `medrxvir`</a>
+      <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
     </li>
   </ul>
 </li>
@@ -88,7 +88,7 @@
       <h1 data-toc-skip>Get started</h1>
                         <h4 class="author">Luke A McGuinness</h4>
             
-            <h4 class="date">2020-04-14</h4>
+            <h4 class="date">2020-04-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mcguinlu/medrxivr/blob/master/vignettes/medrxivr.Rmd"><code>vignettes/medrxivr.Rmd</code></a></small>
       <div class="hidden name"><code>medrxivr.Rmd</code></div>
@@ -97,25 +97,17 @@
 
     
     
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div id="download-the-most-recent-datadump" class="section level2">
+<div id="perform-a-simple-search" class="section level2">
 <h2 class="hasAnchor">
-<a href="#download-the-most-recent-datadump" class="anchor"></a>Download the most recent datadump</h2>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">medrxivr</span>)
+<a href="#perform-a-simple-search" class="anchor"></a>Perform a simple search</h2>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">medrxivr</span>)
 
-<span class="no">mx_all_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="st">"*"</span>)</pre></body></html></div>
+<span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="st">"dementia"</span>)</pre></body></html></div>
 </div>
 <div id="dataset-description" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dataset-description" class="anchor"></a>Dataset description</h2>
-<p>The dataset contains 12 variables:</p>
+<p>The dataset (in this case, <code>results</code>) returned by the search function above contains 10 variables:</p>
 <table class="table table">
 <thead><tr>
 <th style="text-align:left;">
@@ -126,6 +118,14 @@ Description
 </th>
 </tr></thead>
 <tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+ID
+</td>
+<td style="text-align:left;width: 30em; ">
+Unique identifier
+</td>
+</tr>
 <tr>
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
 title
@@ -144,25 +144,18 @@ Preprint abstract
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
-link
+first_author
 </td>
 <td style="text-align:left;width: 30em; ">
-Link to preprint webpage. Note, this only specifes the file path from the base medRxiv url (<a href="https://www.medrxiv.org" class="uri">https://www.medrxiv.org</a>), e.g “/content/10.1101/19012377v1?versioned=TRUE”. The “?versioned=TRUE” is required, as otherwise, the URL will resolve to the most recent version of the article (assuming there is &gt;1 version available).
+Last name of the first author of the preprint. There are plans to update this field to contain all authors names
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
-pdf
+date_posted
 </td>
 <td style="text-align:left;width: 30em; ">
-Link to preprint PDF. At present, only the most recent version of the PDF is returned in <code><a href="../reference/mx_download.html">mx_download()</a></code>
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;border-right:1px solid;">
-date
-</td>
-<td style="text-align:left;width: 30em; ">
+Date the preprint was posted, in the format YYYYMMDD
 </td>
 </tr>
 <tr>
@@ -170,52 +163,56 @@ date
 subject
 </td>
 <td style="text-align:left;width: 30em; ">
+medRxiv classifies each preprint into one of a set number of subject categories. Not this is not always available for recent preprints.
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
-authors
+doi
 </td>
 <td style="text-align:left;width: 30em; ">
+Preprint Digital Object Identifier
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
-bibtex
+link_page
 </td>
 <td style="text-align:left;width: 30em; ">
+Link to preprint webpage. Note, this only specifes the file path from the base medRxiv url (<a href="https://www.medrxiv.org" class="uri">https://www.medrxiv.org</a>), e.g “/content/10.1101/19012377v1?versioned=TRUE”. The “?versioned=TRUE” is required, as otherwise, the URL will resolve to the most recent version of the article (assuming there is &gt;1 version available).
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
-id
+link_pdf
 </td>
 <td style="text-align:left;width: 30em; ">
+Link to preprint PDF. This is used by <code><a href="../reference/mx_download.html">mx_download()</a></code> to download a copy of the PDF for that preprint.
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
-pdf_name
+link_bibtex
 </td>
 <td style="text-align:left;width: 30em; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;border-right:1px solid;">
-extraction_date
-</td>
-<td style="text-align:left;width: 30em; ">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;border-right:1px solid;">
-node
-</td>
-<td style="text-align:left;width: 30em; ">
+Link to preprint bibtex file
 </td>
 </tr>
 </tbody>
 </table>
+</div>
+<div id="download-pdfs-for-records-identified-by-your-search" class="section level2">
+<h2 class="hasAnchor">
+<a href="#download-pdfs-for-records-identified-by-your-search" class="anchor"></a>Download PDFs for records identified by your search</h2>
+<p>Pass the results of your search above (<code>results</code>) to the <code><a href="../reference/mx_download.html">mx_download()</a></code> function to download a copy of the PDF for each record. Note: downloaded PDFs are named using the value of the <code>ID</code> column in the dataset, which serves as a unique identifier for each record.</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/mx_download.html">mx_download</a></span>(<span class="no">results</span>,        <span class="co"># Object returned by mx_search</span>
+            <span class="st">"pdf/"</span>,         <span class="co"># Directory to save PDFs to </span>
+            <span class="kw">create</span> <span class="kw">=</span> <span class="fl">TRUE</span>)  <span class="co"># Create the directory if it doesn't exist</span></pre></body></html></div>
+</div>
+<div id="further-guidance" class="section level2">
+<h2 class="hasAnchor">
+<a href="#further-guidance" class="anchor"></a>Further guidance</h2>
+<p>Please see the <em><a href="https://mcguinlu.github.io/medrxivr/articles/building-complex-search-strategies.html">Building complex search strategies</a></em> vignette for extended guidance on developing search strategies for use with <code>medrxivr</code>.</p>
 </div>
   </div>
 
