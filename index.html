@@ -65,6 +65,9 @@
 <li>
       <a href="articles/building-complex-search-strategies.html">Building complex search strategies</a>
     </li>
+    <li>
+      <a href="articles/medrxiv-api.html">Interacting with the medRxiv API</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -96,7 +99,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><code>medrxivr</code> provides access to a static snapshot of the <em>medRxiv</em> preprint repository, which is automatically updated each morning to capture new records. <code>medrxivr</code> also provides functions to search the snapshot using regular expressions and Boolean logic, and provides a helper function to download the full-text PDFs of relevant preprints.</p>
+<p><code>medrxivr</code> provides programmatic access to the <a href="https://api.biorxiv.org/">medRxiv API</a>, in addition to a static snapshot of the <em>medRxiv</em> preprint repository which is automatically updated each morning. <code>medrxivr</code> also provides functions to search medRxiv records using regular expressions and Boolean logic, and provides a helper function to download the full-text PDFs of relevant preprints.</p>
 <p><strong>Note:</strong> <code>medrxivr</code> is now available as a web-app, which lets you build complex searches via a user-friendly interface, explore the results and export them for screening. In an effort to improve reproducibility, it also creates the code needed to run the search straight from R. The app is available <a href="https://mcguinlu.shinyapps.io/medrxivr/">here.</a></p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -108,17 +111,36 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<div id="perform-a-simple-search" class="section level3">
+<div id="perform-a-simple-search-using-a-copy-of-the-database-from-the-api" class="section level3">
 <h3 class="hasAnchor">
-<a href="#perform-a-simple-search" class="anchor"></a>Perform a simple search</h3>
+<a href="#perform-a-simple-search-using-a-copy-of-the-database-from-the-api" class="anchor"></a>Perform a simple search using a copy of the database from the API</h3>
+<p><code><a href="reference/mx_api_content.html">mx_api_content()</a></code> provides programmatic access to the medRxiv API. However, the API does not allow you to search the database. Instead, you can download a copy of the database yourself via the medRxiv API, and then pass the resulting object to the <code><a href="reference/mx_search.html">mx_search()</a></code> function for searching. This can be useful if you wish to document the exact time and data of your extraction.</p>
 <div class="sourceCode" id="cb2"><pre class="r">
-<span class="no">mx_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/mx_search.html">mx_search</a></span>(<span class="st">"dementia"</span>)</pre></div>
+<span class="no">medrxiv_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/mx_api_content.html">mx_api_content</a></span>()
+
+<span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/mx_search.html">mx_search</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">medrxiv_data</span>,
+                     <span class="kw">query</span> <span class="kw">=</span><span class="st">"dementia"</span>)</pre></div>
+<p>Alternatively, this can be done all in one step using a piped workflow:</p>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+
+<span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu">mx_api</span>() <span class="kw">%&gt;%</span>
+           <span class="fu"><a href="reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span> <span class="st">"dementia"</span>)</pre></div>
+</div>
+<div id="perform-a-simple-search-using-the-daily-snapshot-of-the-database" class="section level3">
+<h3 class="hasAnchor">
+<a href="#perform-a-simple-search-using-the-daily-snapshot-of-the-database" class="anchor"></a>Perform a simple search using the daily snapshot of the database</h3>
+<p>An alternative to the approach detailed above is to search a daily snapshot of the database, taken each morning using the <code><a href="reference/mx_api_content.html">mx_api_content()</a></code> function. Searches performed using this method do not rely on the API (which can become unavilable during peak times) and are usually faster (as it reads data from a CSV rather than having to re-extract it from the API). Information on the snapshot you are using is reported.</p>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">medrxivr</span>)
+
+<span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span> <span class="st">"dementia"</span>)
+<span class="co">#&gt; Using medRxiv snapshot - 2020-05-26 14:16</span>
+<span class="co">#&gt; Found 70 record(s) matching your search.</span></pre></div>
 </div>
 <div id="download-pdfs-for-returned-records" class="section level3">
 <h3 class="hasAnchor">
 <a href="#download-pdfs-for-returned-records" class="anchor"></a>Download PDFs for returned records</h3>
 <p>Pass the results of your search above to the <code><a href="reference/mx_download.html">mx_download()</a></code> function to download a copy of the PDF for each record.</p>
-<div class="sourceCode" id="cb3"><pre class="r">
+<div class="sourceCode" id="cb5"><pre class="r">
 <span class="fu"><a href="reference/mx_download.html">mx_download</a></span>(<span class="no">mx_results</span>,     <span class="co"># Object returned by mx_search</span>
             <span class="st">"pdf/"</span>,         <span class="co"># Directory to save PDFs to </span>
             <span class="kw">create</span> <span class="kw">=</span> <span class="fl">TRUE</span>)  <span class="co"># Create the directory if it doesn't exist</span></pre></div>
