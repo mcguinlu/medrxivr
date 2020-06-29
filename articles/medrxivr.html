@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">medrxivr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.900</span>
       </span>
     </div>
 
@@ -57,10 +57,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
-    </li>
-    <li>
-      <a href="../articles/medrxiv-api.html">Interacting with the medRxiv API</a>
+      <a href="../articles/intro-to-medrxivr.html">Introduction to `medrxvir`</a>
     </li>
   </ul>
 </li>
@@ -85,13 +82,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="medrxivr_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Get started</h1>
                         <h4 class="author">Luke A McGuinness</h4>
             
-            <h4 class="date">2020-05-27</h4>
+            <h4 class="date">2020-06-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mcguinlu/medrxivr/blob/master/vignettes/medrxivr.Rmd"><code>vignettes/medrxivr.Rmd</code></a></small>
       <div class="hidden name"><code>medrxivr.Rmd</code></div>
@@ -100,47 +97,117 @@
 
     
     
-<div id="perform-a-simple-search-using-a-copy-of-the-database-from-the-api" class="section level2">
+<div id="download-the-most-recent-datadump" class="section level2">
 <h2 class="hasAnchor">
-<a href="#perform-a-simple-search-using-a-copy-of-the-database-from-the-api" class="anchor"></a>Perform a simple search using a copy of the database from the API</h2>
-<p><code>medrxivr</code> provides programmatic access to the medRxiv API. However, the API does not allow you to search the database. Instead, you can download a copy of the database yourself via <code><a href="../reference/mx_api_content.html">mx_api_content()</a></code>, and then pass the resulting object to the <code><a href="../reference/mx_search.html">mx_search()</a></code> function for searching (i.e. rather than using the daily snapshot). This can be useful if you wish to document the exact time and data of your extraction, or if the daily snapshot is not updating.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r">
-<span class="no">medrxiv_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_api_content.html">mx_api_content</a></span>()
+<a href="#download-the-most-recent-datadump" class="anchor"></a>Download the most recent datadump</h2>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">medrxivr</span>)
 
-<span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">medrxiv_data</span>,
-                     <span class="kw">query</span> <span class="kw">=</span><span class="st">"dementia"</span>)</pre></body></html></div>
-<p>Alternatively, this can be done all in one step using a piped workflow:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-
-<span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu">mx_api</span>() <span class="kw">%&gt;%</span>
-           <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span><span class="st">"dementia"</span>)</pre></body></html></div>
-</div>
-<div id="perform-a-simple-search-using-the-daily-snapshot-of-the-database" class="section level2">
-<h2 class="hasAnchor">
-<a href="#perform-a-simple-search-using-the-daily-snapshot-of-the-database" class="anchor"></a>Perform a simple search using the daily snapshot of the database</h2>
-<p>An alternative to the approach detailed above is to search a daily snapshot of the database, taken each morning using the <code><a href="../reference/mx_api_content.html">mx_api_content()</a></code> function. Searches performed using this method do not rely on the API (which can become unavilable during peak times) and are usually faster (as it reads data from a CSV rather than having to re-extract it from the API).</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">medrxivr</span>)
-
-<span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span><span class="st">"dementia"</span>)</pre></body></html></div>
+<span class="no">mx_all_data</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="st">"*"</span>)</pre></body></html></div>
 </div>
 <div id="dataset-description" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dataset-description" class="anchor"></a>Dataset description</h2>
-<p>The dataset (in this case, <code>results</code>) returned by the search function above contains 10 variables:</p>
-</div>
-<div id="download-pdfs-for-records-identified-by-your-search" class="section level2">
-<h2 class="hasAnchor">
-<a href="#download-pdfs-for-records-identified-by-your-search" class="anchor"></a>Download PDFs for records identified by your search</h2>
-<p>Pass the results of your search above (<code>results</code>) to the <code><a href="../reference/mx_download.html">mx_download()</a></code> function to download a copy of the PDF for each record. Note: downloaded PDFs are named using the value of the <code>ID</code> column in the dataset, which serves as a unique identifier for each record.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r">
-<span class="fu"><a href="../reference/mx_download.html">mx_download</a></span>(<span class="no">results</span>,        <span class="co"># Object returned by mx_search</span>
-            <span class="st">"pdf/"</span>,         <span class="co"># Directory to save PDFs to </span>
-            <span class="kw">create</span> <span class="kw">=</span> <span class="fl">TRUE</span>)  <span class="co"># Create the directory if it doesn't exist</span></pre></body></html></div>
-</div>
-<div id="further-guidance" class="section level2">
-<h2 class="hasAnchor">
-<a href="#further-guidance" class="anchor"></a>Further guidance</h2>
-<p>Please see the <em><a href="https://mcguinlu.github.io/medrxivr/articles/building-complex-search-strategies.html">Building complex search strategies</a></em> vignette for extended guidance on developing search strategies for use with <code>medrxivr</code>.</p>
+<p>The dataset contains 12 variables:</p>
+<table class="table table">
+<thead><tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Description
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+title
+</td>
+<td style="text-align:left;width: 30em; ">
+Preprint title
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+abstract
+</td>
+<td style="text-align:left;width: 30em; ">
+Preprint abstract
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+link
+</td>
+<td style="text-align:left;width: 30em; ">
+Link to preprint webpage. Note, this only specifes the file path from the base medRxiv url (<a href="https://www.medrxiv.org" class="uri">https://www.medrxiv.org</a>), e.g “/content/10.1101/19012377v1?versioned=TRUE”. The “?versioned=TRUE” is required, as otherwise, the URL will resolve to the most recent version of the article (assuming there is &gt;1 version available).
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+pdf
+</td>
+<td style="text-align:left;width: 30em; ">
+Link to preprint PDF. At present, only the most recent version of the PDF is returned in <code><a href="../reference/mx_download.html">mx_download()</a></code>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+date
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+subject
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+authors
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+bibtex
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+id
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+pdf_name
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+extraction_date
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+node
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+</tr>
+</tbody>
+</table>
 </div>
   </div>
 
@@ -159,7 +226,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

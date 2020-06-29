@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">medrxivr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.900</span>
       </span>
     </div>
 
@@ -97,10 +97,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
-    </li>
-    <li>
-      <a href="../articles/medrxiv-api.html">Interacting with the medRxiv API</a>
+      <a href="../articles/intro-to-medrxivr.html">Introduction to `medrxvir`</a>
     </li>
   </ul>
 </li>
@@ -132,23 +129,9 @@
       <small>Source: <a href='https://github.com/mcguinlu/medrxivr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="medrxivr-002" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.2">
-<a href="#medrxivr-002" class="anchor"></a>medrxivr 0.0.2</h1>
-<p>Major changes:</p>
-<ul>
-<li>Following the release of the <a href="https://api.biorxiv.org/">medRxiv API</a>, the way the snapshot of the medRxiv site is taken has changed, resulting in a more accurate snapshot of the entire repository being taken daily (as opposed to just new articles being captured, as was previously the case). This has introduced some breaking changes (e.g. in the <code>fields</code> argument, “subject” has become “category”, and “link” has become “doi”), but will result in better long-term stability of the package.</li>
-<li>TWo new functions, <code><a href="../reference/mx_api_content.html">mx_api_content()</a></code> and <code><a href="../reference/mx_api_doi.html">mx_api_doi()</a></code>, have been added to allow users to interact with the medRxiv API endpoints directly. A new vignette documenting these functions has been added.</li>
-<li>The API has also allowed for improved data collection. The “authors” variable searched/returned now contains all authors of the paper as opposed to just the first one. Several additional fields are now returned, including corresponding author’s institution, preprint license, and the DOI of the published, peer-reviewed version of preprint (if available).</li>
-<li>A companion app was launched, which allows you to build the search strategy using a user-friendly interface and then export the code needed to run it directly from R. The app can be found <a href="https://mcguinlu.shinyapps.io/medrxivr/">here</a>.</li>
-<li>You can now define the field(s) you wish to search. By default, the Title, Abstract, First Author, Subject, and Link (which includes the DOI) fields are searched.</li>
-<li>There is no longer a limit on the number of distinct topics you can search for (previously it was 5).</li>
-<li>The output of <code><a href="../reference/mx_search.html">mx_search()</a></code> has been cleaned to make it more useful to future end-users. Of note, some of the columns names have changed, and the “pdf_name” and “extraction_date” variables are no longer returned.</li>
-</ul>
-</div>
-    <div id="medrxivr-001" class="section level1">
+    <div id="medrxivr-0-0-1" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.1">
-<a href="#medrxivr-001" class="anchor"></a>medrxivr 0.0.1</h1>
+<a href="#medrxivr-0-0-1" class="anchor"></a>medrxivr 0.0.1</h1>
 <ul>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 </ul>
@@ -170,7 +153,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
