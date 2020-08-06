@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Search medRxiv — mx_info • medrxivr</title>
+<title>Provide information on the snapshot used to perform the search — mx_info • medrxivr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Search medRxiv — mx_info" />
-<meta property="og:description" content="Get information about the data dump you are using" />
+<meta property="og:title" content="Provide information on the snapshot used to perform the search — mx_info" />
+<meta property="og:description" content="Provide information on the snapshot used to perform the search" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">medrxivr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -98,7 +98,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/intro-to-medrxivr.html">Introduction to `medrxvir`</a>
+      <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
+    </li>
+    <li>
+      <a href="../articles/medrxiv-api.html">Interacting with the API</a>
     </li>
   </ul>
 </li>
@@ -126,23 +129,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Search medRxiv</h1>
+    <h1>Provide information on the snapshot used to perform the search</h1>
     <small class="dont-index">Source: <a href='https://github.com/mcguinlu/medrxivr/blob/master/R/mx_info.R'><code>R/mx_info.R</code></a></small>
     <div class="hidden name"><code>mx_info.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get information about the data dump you are using</p>
+    <p>Provide information on the snapshot used to perform the search</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mx_info</span>()</pre>
+    <pre class="usage"><span class='fu'>mx_info</span>(commit = <span class='st'>"master"</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>commit</th>
+      <td><p>Commit hash for the snapshot, taken from
+https://github.com/mcguinlu/medrxivr-data. Defaults to "master", which will
+return info on the most recent snapshot.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Message with snapshot details</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>mx_info</span>()
-}</div></pre>
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -158,7 +175,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>

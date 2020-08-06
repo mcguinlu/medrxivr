@@ -60,7 +60,7 @@
       <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
     </li>
     <li>
-      <a href="../articles/medrxiv-api.html">Interacting with the medRxiv API</a>
+      <a href="../articles/medrxiv-api.html">Interacting with the API</a>
     </li>
   </ul>
 </li>
@@ -85,13 +85,13 @@
 
       
 
-      </header><div class="row">
+      </header><script src="building-complex-search-strategies_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Building complex search strategies</h1>
                         <h4 class="author">Luke A McGuinness</h4>
             
-            <h4 class="date">2020-05-27</h4>
+            <h4 class="date">2020-08-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mcguinlu/medrxivr/blob/master/vignettes/building-complex-search-strategies.Rmd"><code>vignettes/building-complex-search-strategies.Rmd</code></a></small>
       <div class="hidden name"><code>building-complex-search-strategies.Rmd</code></div>
@@ -104,17 +104,25 @@
 <h2 class="hasAnchor">
 <a href="#building-your-search-with-boolean-operators" class="anchor"></a>Building your search with Boolean operators</h2>
 <p>First load the <code>medrxivr</code> package:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">medrxivr</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/mcguinlu/medrxivr">medrxivr</a></span>)
+</pre></div>
 <p>To find records that contain any of many terms, pass the terms as a vector to the <code><a href="../reference/mx_search.html">mx_search()</a></code> function, as in the code chunk below. Query terms can include regular expression syntax - see the <a href="#regex">section at the end of this document</a> on common regular expression that may be useful when searching.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">myquery</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dementia"</span>,<span class="st">"vascular"</span>,<span class="st">"alzheimer's"</span>) <span class="co"># Combined with Boolean OR</span>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">myquery</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dementia"</span>,<span class="st">"vascular"</span>,<span class="st">"alzheimer's"</span>) <span class="co"># Combined with Boolean OR</span>
 
-<span class="no">mx_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span> <span class="no">myquery</span>)</pre></body></html></div>
+<span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),     <span class="co"># Use daily snapshot for data</span>
+                        query = <span class="kw">myquery</span>)
+</pre></div>
 <p>To find records relevant to more than one topic domain, create a vector for each topic (note: there is no upper limit on the number of topics your can have) and combine these vectors into a list which is then passed to the <code><a href="../reference/mx_search.html">mx_search()</a></code> function:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">topic1</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dementia"</span>,<span class="st">"vascular"</span>,<span class="st">"alzheimer's"</span>)  <span class="co"># Combined with Boolean OR</span>
-<span class="no">topic2</span>  <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lipids"</span>,<span class="st">"statins"</span>,<span class="st">"cholesterol"</span>)     <span class="co"># Combined with Boolean OR</span>
-<span class="no">myquery</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">topic1</span>, <span class="no">topic2</span>)                    <span class="co"># Combined with Boolean AND</span>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">topic1</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dementia"</span>,<span class="st">"vascular"</span>,<span class="st">"alzheimer's"</span>)  <span class="co"># Combined with Boolean OR</span>
+<span class="kw">topic2</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lipids"</span>,<span class="st">"statins"</span>,<span class="st">"cholesterol"</span>)     <span class="co"># Combined with Boolean OR</span>
+<span class="kw">myquery</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">topic1</span>, <span class="kw">topic2</span>)                    <span class="co"># Combined with Boolean AND</span>
 
-<span class="no">mx_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span> <span class="no">myquery</span>)</pre></body></html></div>
+<span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
+                        query = <span class="kw">myquery</span>)
+</pre></div>
 </div>
 <div id="additional-filters-and-options" class="section level2">
 <h2 class="hasAnchor">
@@ -123,45 +131,59 @@
 <h3 class="hasAnchor">
 <a href="#limit-search-by-field" class="anchor"></a>Limit search by field</h3>
 <p>By default, a range of fields (title, abstract, first author, subject, link (which contains DOI)) are searched, but you can limit the search to a subset of these using the <code>fields</code> argument:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r">
+<div class="sourceCode" id="cb4"><pre class="downlit">
+
 <span class="co"># Limit search to title/abstract</span>
-<span class="no">mx_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span> <span class="st">"dementia"</span>,
-                        <span class="kw">fields</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"title"</span>,<span class="st">"abstract"</span>))
+<span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
+                        query = <span class="st">"dementia"</span>,
+                        fields = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"title"</span>,<span class="st">"abstract"</span>))
 
 <span class="co"># Search by DOI</span>
-<span class="no">mx_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span> <span class="st">"10.1101/2020.01.30.20019836"</span>,
-                        <span class="kw">fields</span> <span class="kw">=</span> <span class="st">"link"</span>)</pre></body></html></div>
+<span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
+                        query = <span class="st">"10.1101/2020.01.30.20019836"</span>,
+                        fields = <span class="st">"link"</span>)
+</pre></div>
 </div>
 <div id="exclude-records-containing-certain-terms" class="section level3">
 <h3 class="hasAnchor">
 <a href="#exclude-records-containing-certain-terms" class="anchor"></a>Exclude records containing certain terms</h3>
 <p>Often it is useful to be able to exclude records that contain a certain term that is not relevant to your search. For example, in the search below, we are looking for records related to “dementia” alone by excluding those that mention “mild cognitive impairment”:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">mx_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span> <span class="st">"dementia"</span>,
-                        <span class="kw">NOT</span> <span class="kw">=</span> <span class="st">"mild cognitive impairment"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
+                        query = <span class="st">"dementia"</span>,
+                        NOT = <span class="st">"[Mm]ild cognitive impairment"</span>)
+</pre></div>
 </div>
 <div id="limit-by-date-posted" class="section level3">
 <h3 class="hasAnchor">
 <a href="#limit-by-date-posted" class="anchor"></a>Limit by date posted</h3>
 <p>You can define either/both of the earliest and latest date you wish to include records from. Note: the search is inclusive of both dates specified:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">mx_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span> <span class="st">"dementia"</span>,
-                        <span class="kw">from.date</span> <span class="kw">=</span> <span class="fl">20200101</span>,      <span class="co"># 1st Jan 2020</span>
-                        <span class="kw">to.date</span> <span class="kw">=</span> <span class="fl">20200105</span>)        <span class="co"># 5th Jan 2020</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
+                        query = <span class="st">"dementia"</span>,
+                        from_date = <span class="st">"2020-01-01"</span>,      <span class="co"># 1st Jan 2020</span>
+                        to_date = <span class="st">"2020-01-05"</span>)        <span class="co"># 5th Jan 2020</span>
+</pre></div>
 </div>
 <div id="return-multiple-versions-of-a-record" class="section level3">
 <h3 class="hasAnchor">
 <a href="#return-multiple-versions-of-a-record" class="anchor"></a>Return multiple versions of a record</h3>
 <p><em>medRxiv</em> allows authors to upload a new version of their preprint as often as they like. By default, <code>medrxivr</code> only returns the most recent version of the preprint, but if you are interested in exploring how a record changed over time, you can retrieve all versions of the preprint by setting <code>deduplicate = FALSE</code></p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">mx_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span> <span class="st">"dementia"</span>,
-                        <span class="kw">deduplicate</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
+                        query = <span class="st">"10.1101/2020.01.30.20019836"</span>,
+                        fields = <span class="st">"link"</span>,
+                        deduplicate = <span class="fl">FALSE</span>)
+</pre></div>
 </div>
 </div>
 <div id="regex" class="section level2">
 <h2 class="hasAnchor">
-<a href="#regex" class="anchor"></a>Useful regular expression (<em>regex</em>) syntaxes for the systematic reviewer</h2>
+<a href="#regex" class="anchor"></a>Useful regular expression (<em>regex</em>) syntax for the systematic reviewer</h2>
 <div id="capitalisation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#capitalisation" class="anchor"></a>Capitalisation</h3>
-<p><strong>Example regex:</strong> <code>[Dd]ementia</code><br><strong>Description:</strong> The search is case sensitive, so this syntax allows you to find both <b>D</b>ementia and <b>d</b>ementia using a single term, rather than having to enter them seperately.</p>
+<p><strong>Example regex:</strong> <code>[Dd]ementia</code><br><strong>Description:</strong> The search is case sensitive, so this syntax allows you to find both <b>D</b>ementia and <b>d</b>ementia using a single term, rather than having to enter them separately.</p>
 </div>
 <div id="wildcard" class="section level3">
 <h3 class="hasAnchor">
@@ -182,7 +204,10 @@
 <h3 class="hasAnchor">
 <a href="#example-using-these-regexes" class="anchor"></a>Example using these regexes</h3>
 <p>To find records that contain “Mendelian” within 4 words of “randomisation” (with varying capitalisation of “Mendelian” and UK/US spellings of “randomisation”), the following syntax is correct:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">mx_results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(<span class="kw">query</span> <span class="kw">=</span> <span class="st">"[Mm]endelian(\\s)([[:graph:]]+\\s){0,4}randomi([[:alpha:]])ation"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
+                        query = <span class="st">"[Mm]endelian(\\s)([[:graph:]]+\\s){0,4}randomi([[:alpha:]])ation"</span>)
+</pre></div>
 </div>
 <div id="regex-tester" class="section level3">
 <h3 class="hasAnchor">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Access medrxiv API — mx_api_content • medrxivr</title>
+<title>Access Cold Springs Harbour API, which serves both medRxiv and bioRxiv — mx_api_content • medrxivr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Access medrxiv API — mx_api_content" />
-<meta property="og:description" content="Access medrxiv API" />
+<meta property="og:title" content="Access Cold Springs Harbour API, which serves both medRxiv and bioRxiv — mx_api_content" />
+<meta property="og:description" content="Access Cold Springs Harbour API, which serves both medRxiv and bioRxiv" />
 
 
 
@@ -101,7 +101,7 @@
       <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
     </li>
     <li>
-      <a href="../articles/medrxiv-api.html">Interacting with the medRxiv API</a>
+      <a href="../articles/medrxiv-api.html">Interacting with the API</a>
     </li>
   </ul>
 </li>
@@ -129,38 +129,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Access medrxiv API</h1>
+    <h1>Access Cold Springs Harbour API, which serves both medRxiv and bioRxiv</h1>
     <small class="dont-index">Source: <a href='https://github.com/mcguinlu/medrxivr/blob/master/R/mx_api.R'><code>R/mx_api.R</code></a></small>
     <div class="hidden name"><code>mx_api_content.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Access medrxiv API</p>
+    <p>Access Cold Springs Harbour API, which serves both medRxiv and bioRxiv</p>
     </div>
 
     <pre class="usage"><span class='fu'>mx_api_content</span>(
-  <span class='kw'>from.date</span> <span class='kw'>=</span> <span class='st'>"2019-06-01"</span>,
-  <span class='kw'>to.date</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>(),
-  <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>include.info</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  from_date = <span class='st'>"2013-01-01"</span>,
+  to_date = <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>()),
+  clean = <span class='fl'>TRUE</span>,
+  server = <span class='st'>"medrxiv"</span>,
+  include.info = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>from.date</th>
-      <td><p>Earliest date of interst. Defaults to 1st June 2019
+      <th>from_date</th>
+      <td><p>Earliest date of interest. Defaults to 1st June 2019
 (earliest medRxiv record was posted on 25th June 2019).</p></td>
     </tr>
     <tr>
-      <th>to.date</th>
+      <th>to_date</th>
       <td><p>Latest date of interest. Defaults to current date.</p></td>
     </tr>
     <tr>
       <th>clean</th>
       <td><p>Logical, indicating whether to clean the data returned for use
-with other mx_* functions.</p></td>
+with other mx_* functions. Default is TRUE.</p></td>
+    </tr>
+    <tr>
+      <th>server</th>
+      <td><p>Specify the server you wish to use: "medrxiv" (default) or
+"biorxiv"</p></td>
     </tr>
     <tr>
       <th>include.info</th>
@@ -175,12 +181,13 @@ of papers, etc). Default is FALSE.</p></td>
     <p>Dataframe with 1 record per row</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other api: 
-<code><a href='mx_api_doi.html'>mx_api_doi</a>()</code></p></div>
+    <div class='dont-index'><p>Other data-source: 
+<code><a href='mx_api_doi.html'>mx_api_doi</a>()</code>,
+<code><a href='mx_snapshot.html'>mx_snapshot</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>mx_data</span> <span class='kw'>&lt;-</span> <span class='fu'>mx_api</span>()
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>mx_data</span> <span class='op'>&lt;-</span> <span class='fu'>mx_api_content</span>()
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

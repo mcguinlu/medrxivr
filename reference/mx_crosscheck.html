@@ -40,7 +40,9 @@
 
 
 <meta property="og:title" content="Live check against medRxiv — mx_crosscheck" />
-<meta property="og:description" content="Cross-check whether the dataset you are using is current" />
+<meta property="og:description" content="Provides information on how up-to-date the snapshot is by
+  checking whether there have been any records added to/updated in the
+  medRxiv repository since the last snapshot was taken." />
 
 
 
@@ -72,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">medrxivr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -98,7 +100,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/intro-to-medrxivr.html">Introduction to `medrxvir`</a>
+      <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
+    </li>
+    <li>
+      <a href="../articles/medrxiv-api.html">Interacting with the API</a>
     </li>
   </ul>
 </li>
@@ -132,7 +137,9 @@
     </div>
 
     <div class="ref-description">
-    <p>Cross-check whether the dataset you are using is current</p>
+    <p>Provides information on how up-to-date the snapshot is by
+  checking whether there have been any records added to/updated in the
+  medRxiv repository since the last snapshot was taken.</p>
     </div>
 
     <pre class="usage"><span class='fu'>mx_crosscheck</span>()</pre>
@@ -140,7 +147,7 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>mx_crosscheck</span>()
 }</div></pre>
   </div>
@@ -158,7 +165,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
