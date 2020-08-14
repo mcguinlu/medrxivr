@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Live check against medRxiv — mx_crosscheck • medrxivr</title>
+<title>Check how up-to-date the maintained medRxiv snapshot is — mx_crosscheck • medrxivr</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,11 @@
 
 
 
-<meta property="og:title" content="Live check against medRxiv — mx_crosscheck" />
-<meta property="og:description" content="Provides information on how up-to-date the snapshot is by
-  checking whether there have been any records added to/updated in the
-  medRxiv repository since the last snapshot was taken." />
+<meta property="og:title" content="Check how up-to-date the maintained medRxiv snapshot is — mx_crosscheck" />
+<meta property="og:description" content="Provides information on how up-to-date the maintained medRxiv
+  snapshot provided by `mx_snapshot()` is by checking whether there have been
+  any records added to, or updated in, the medRxiv repository since the last
+  snapshot was taken." />
 
 
 
@@ -74,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">medrxivr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2.900</span>
       </span>
     </div>
 
@@ -103,7 +104,7 @@
       <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
     </li>
     <li>
-      <a href="../articles/medrxiv-api.html">Interacting with the API</a>
+      <a href="../articles/medrxiv-api.html">Interacting with the Cold Spring Harbour Laboratory API</a>
     </li>
   </ul>
 </li>
@@ -131,20 +132,26 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Live check against medRxiv</h1>
+    <h1>Check how up-to-date the maintained medRxiv snapshot is</h1>
     <small class="dont-index">Source: <a href='https://github.com/mcguinlu/medrxivr/blob/master/R/mx_crosscheck.R'><code>R/mx_crosscheck.R</code></a></small>
     <div class="hidden name"><code>mx_crosscheck.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Provides information on how up-to-date the snapshot is by
-  checking whether there have been any records added to/updated in the
-  medRxiv repository since the last snapshot was taken.</p>
+    <p>Provides information on how up-to-date the maintained medRxiv
+  snapshot provided by `mx_snapshot()` is by checking whether there have been
+  any records added to, or updated in, the medRxiv repository since the last
+  snapshot was taken.</p>
     </div>
 
     <pre class="usage"><span class='fu'>mx_crosscheck</span>()</pre>
 
 
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other helper: 
+<code><a href='mx_download.html'>mx_download</a>()</code>,
+<code><a href='mx_export.html'>mx_export</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {

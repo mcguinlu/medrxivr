@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Search medRxiv — mx_search • medrxivr</title>
+<title>Search preprint data — mx_search • medrxivr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Search medRxiv — mx_search" />
-<meta property="og:description" content="Search medRxiv using a string" />
+<meta property="og:title" content="Search preprint data — mx_search" />
+<meta property="og:description" content="Search preprint data" />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">medrxivr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2.900</span>
       </span>
     </div>
 
@@ -101,7 +101,7 @@
       <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
     </li>
     <li>
-      <a href="../articles/medrxiv-api.html">Interacting with the API</a>
+      <a href="../articles/medrxiv-api.html">Interacting with the Cold Spring Harbour Laboratory API</a>
     </li>
   </ul>
 </li>
@@ -129,13 +129,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Search medRxiv</h1>
+    <h1>Search preprint data</h1>
     <small class="dont-index">Source: <a href='https://github.com/mcguinlu/medrxivr/blob/master/R/mx_search.R'><code>R/mx_search.R</code></a></small>
     <div class="hidden name"><code>mx_search.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Search medRxiv using a string</p>
+    <p>Search preprint data</p>
     </div>
 
     <pre class="usage"><span class='fu'>mx_search</span>(
@@ -153,7 +153,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>The medRxiv dataset that is to be searched, created either using
+      <td><p>The preprint dataset that is to be searched, created either using
 mx_api_content() or mx_snapshot()</p></td>
     </tr>
     <tr>
@@ -189,11 +189,6 @@ Default is TRUE.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other main: 
-<code><a href='mx_download.html'>mx_download</a>()</code>,
-<code><a href='mx_export.html'>mx_export</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {

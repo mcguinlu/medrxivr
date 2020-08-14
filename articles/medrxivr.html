@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">medrxivr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2.900</span>
       </span>
     </div>
 
@@ -60,7 +60,7 @@
       <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
     </li>
     <li>
-      <a href="../articles/medrxiv-api.html">Interacting with the API</a>
+      <a href="../articles/medrxiv-api.html">Interacting with the Cold Spring Harbour Laboratory API</a>
     </li>
   </ul>
 </li>
@@ -91,7 +91,7 @@
       <h1 data-toc-skip>Get started</h1>
                         <h4 class="author">Luke A McGuinness</h4>
             
-            <h4 class="date">2020-08-06</h4>
+            <h4 class="date">2020-08-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mcguinlu/medrxivr/blob/master/vignettes/medrxivr.Rmd"><code>vignettes/medrxivr.Rmd</code></a></small>
       <div class="hidden name"><code>medrxivr.Rmd</code></div>
@@ -100,75 +100,80 @@
 
     
     
-<p><a href="https://www.medrxiv.org/">medRxiv</a> is a free online repository for complete but unpublished manuscripts (preprints) in the medical, clinical, and related health sciences. The <code>medrxivr</code> package provides programmatic access to the <a href="https://api.biorxiv.org/">medRxiv API</a>, in addition to a static snapshot of the <em>medRxiv</em> preprint repository which is automatically updated each morning (see <a href="#data-sources">Data sources</a>).</p>
-<div id="usage" class="section level2">
+<p>An increasingly important source of health-related bibliographic content are preprints - preliminary versions of research articles that have yet to undergo peer review. The two preprint repositories most relevant to health-related sciences are <a href="https://www.medrxiv.org/">medRxiv</a> and <a href="https://www.biorxiv.org/">bioRxiv</a>, both of which are operated by the Cold Spring Harbor Laboratory.</p>
+<p>The goal of the <code>medrxivr</code> R package is two-fold. In the first instance, it provides programmatic access to the <a href="https://api.biorxiv.org/">Cold Spring Harbour Laboratory (CSHL) API</a>, allowing users to easily download medRxiv and bioRxiv preprint metadata (e.g. title, abstract, publication date, author list, etc) into R. The package also provides access to a maintained static snapshot of the medRxiv repository (see <a href="#medrxiv-data">Data sources</a>). Secondly, <code>medrxivr</code> provides functions to search the downloaded preprint records using regular expressions and Boolean logic, as well as helper functions that allow users to export their search results to a .BIB file for easy import to a reference manager and to download the full-text PDFs of preprints matching their search criteria.</p>
+<div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<div id="data-sources" class="section level3">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>You can install the development version of this package using:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"mcguinlu/medrxivr"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/mcguinlu/medrxivr">medrxivr</a></span>)
+</pre></div>
+</div>
+<div id="data-sources" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data-sources" class="anchor"></a>Data sources</h2>
+<div id="medrxiv-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#data-sources" class="anchor"></a>Data sources</h3>
+<a href="#medrxiv-data" class="anchor"></a>medRxiv data</h3>
 <p><code>medrixvr</code> provides two ways to access medRxiv data:</p>
 <ul>
-<li><p><code><a href="../reference/mx_api_content.html">mx_api_content()</a></code> creates a local copy of all data available from the medRxiv API at the time the function is run.</p></li>
-<li><p><code><a href="../reference/mx_snapshot.html">mx_snapshot()</a></code> provides access to a static snapshot of the database. The snapshot is created each morning at 6am using <code><a href="../reference/mx_api_content.html">mx_api_content()</a></code> and is stored as CSV file in the <a href="https://github.com/mcguinlu/medrxivr-data">medrxivr-data repository</a>. This method does not rely on the API (which can become unavailable during peak usage times) and is usually faster (as it reads data from a CSV rather than having to re-extract it from the API). Discrepancies between the most recent static snapshot and the live database can be assessed using <code><a href="../reference/mx_crosscheck.html">mx_crosscheck()</a></code>.</p></li>
+<li>
+<code><a href="../reference/mx_api_content.html">mx_api_content(server = "medrxiv")</a></code> creates a local copy of all data available from the medRxiv API at the time the function is run.</li>
 </ul>
-<p>The relationship between the two methods is summarised in the figure below:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># Get a copy of the database from the live medRxiv API endpoint</span>
+<span class="kw">preprint_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_api_content.html">mx_api_content</a></span>()  
+</pre></div>
+<ul>
+<li>
+<code><a href="../reference/mx_snapshot.html">mx_snapshot()</a></code> provides access to a static snapshot of the medRxiv database. The snapshot is created each morning at 6am using <code><a href="../reference/mx_api_content.html">mx_api_content()</a></code> and is stored as CSV file in the <a href="https://github.com/mcguinlu/medrxivr-data">medrxivr-data repository</a>. This method does not rely on the API (which can become unavailable during peak usage times) and is usually faster (as it reads data from a CSV rather than having to re-extract it from the API). Discrepancies between the most recent static snapshot and the live database can be assessed using <code><a href="../reference/mx_crosscheck.html">mx_crosscheck()</a></code>.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="co"># Get a copy of the database from the daily snapshot</span>
+<span class="kw">preprint_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>()  
+</pre></div>
+<p>The relationship between the two methods for the medRxiv database is summarised in the figure below:</p>
 <p><img src="data_sources.png" width="500px" height="400px"></p>
 </div>
-</div>
-<div id="perform-a-simple-search" class="section level2">
-<h2 class="hasAnchor">
-<a href="#perform-a-simple-search" class="anchor"></a>Perform a simple search</h2>
-<div id="using-data-from-the-api" class="section level3">
+<div id="biorxiv-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#using-data-from-the-api" class="anchor"></a>Using data from the API</h3>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-
-<span class="co"># Get a copy of the database from the live API</span>
-<span class="kw">medrxiv_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_api_content.html">mx_api_content</a></span>()
-
-<span class="co"># Perform a simple search</span>
-<span class="kw">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="kw">medrxiv_data</span>,
-                     query =<span class="st">"dementia"</span>)
-</pre></div>
-</div>
-<div id="using-the-daily-snapshot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#using-the-daily-snapshot" class="anchor"></a>Using the daily snapshot</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-
-<span class="co"># Get a copy of the database from the daily snapshot</span>
-<span class="kw">medrxiv_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>()
-
-<span class="co"># Perform a simple search</span>
-<span class="kw">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="kw">medrxiv_data</span>,
-                     query =<span class="st">"dementia"</span>)
-</pre></div>
-</div>
-<div id="using-a-copy-of-the-database-from-the-api" class="section level3">
-<h3 class="hasAnchor">
-<a href="#using-a-copy-of-the-database-from-the-api" class="anchor"></a>Using a copy of the database from the API</h3>
-<p><code><a href="../reference/mx_api_content.html">mx_api_content()</a></code> provides programmatic access to the medRxiv API. However, the API does not allow you to search the database. Instead, you can download a copy of the database yourself via the medRxiv API, and then pass the resulting object to the <code><a href="../reference/mx_search.html">mx_search()</a></code> function for searching. This can be useful if you wish to document the exact time and data of your extraction.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-
-<span class="kw">medrxiv_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_api_content.html">mx_api_content</a></span>()
-
-<span class="kw">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="kw">medrxiv_data</span>,
-                     query =<span class="st">"dementia"</span>)
-</pre></div>
-<p>Alternatively, this can be done all in one step using a piped workflow:</p>
+<a href="#biorxiv-data" class="anchor"></a>bioRxiv data</h3>
+<p>Only one data source exists for the bioRxiv repository:</p>
+<ul>
+<li>
+<code><a href="../reference/mx_api_content.html">mx_api_content(server = "biorxiv")</a></code> creates a local copy of all data available from the bioRxiv API endpoint at the time the function is run. <strong>Note</strong>: due to it’s size, downloading a complete copy of the bioRxiv repository in this manner takes a long time (~ 1 hour).</li>
+</ul>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
-
-<span class="kw">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_api_content.html">mx_api_content</a></span>() <span class="op">%&gt;%</span>
-           <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(query = <span class="st">"dementia"</span>)
+<span class="co"># Get a copy of the database from the live bioRxiv API endpoint</span>
+<span class="kw">preprint_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_api_content.html">mx_api_content</a></span>(server = <span class="st">"biorxiv"</span>)
 </pre></div>
 </div>
+</div>
+<div id="performing-your-search" class="section level2">
+<h2 class="hasAnchor">
+<a href="#performing-your-search" class="anchor"></a>Performing your search</h2>
+<p>Once you have created a local copy of either the medRxiv or bioRxiv preprint database, you can pass this object (<code>preprint_data</code> in the examples above) to <code><a href="../reference/mx_search.html">mx_search()</a></code> to search the preprint records using an advanced search strategy.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+
+<span class="co"># Perform a simple search</span>
+<span class="kw">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="kw">preprint_data</span>,
+                     query =<span class="st">"dementia"</span>)
+
+<span class="co"># Perform an advanced search</span>
+<span class="kw">topic1</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"dementia"</span>,<span class="st">"vascular"</span>,<span class="st">"alzheimer's"</span>)  <span class="co"># Combined with Boolean OR</span>
+<span class="kw">topic2</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lipids"</span>,<span class="st">"statins"</span>,<span class="st">"cholesterol"</span>)     <span class="co"># Combined with Boolean OR</span>
+<span class="kw">myquery</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">topic1</span>, <span class="kw">topic2</span>)                    <span class="co"># Combined with Boolean AND</span>
+
+<span class="kw">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="kw">preprint_data</span>,
+                     query = <span class="kw">myquery</span>)
+</pre></div>
 </div>
 <div id="dataset-description" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dataset-description" class="anchor"></a>Dataset description</h2>
-<p>The dataset (in this case, <code>results</code>) returned by the search function above contains 10 variables:</p>
+<p>The dataset (in this case, <code>results</code>) returned by the search function above contains 14 variables:</p>
 <table class="table table">
 <thead><tr>
 <th style="text-align:left;">
@@ -298,7 +303,7 @@ If the preprint was subsequently published in a peer-reviewed journal, this vari
 <h2 class="hasAnchor">
 <a href="#export-records-identified-by-your-search-to-a--bib-file" class="anchor"></a>Export records identified by your search to a .BIB file</h2>
 <p><code>medrxivr</code> provides a helper function to export your search results to a .BIB file so that they can be easily imported into a reference manager (e.g. Zotero, Mendeley)</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
+<div class="sourceCode" id="cb6"><pre class="downlit">
 
 <span class="fu"><a href="../reference/mx_export.html">mx_export</a></span>(data = <span class="kw">mx_results</span>,
           file = <span class="st">"mx_search_results.bib"</span>)
@@ -307,8 +312,8 @@ If the preprint was subsequently published in a peer-reviewed journal, this vari
 <div id="download-pdfs-for-records-identified-by-your-search" class="section level2">
 <h2 class="hasAnchor">
 <a href="#download-pdfs-for-records-identified-by-your-search" class="anchor"></a>Download PDFs for records identified by your search</h2>
-<p>Pass the results of your search above (<code>results</code>) to the <code><a href="../reference/mx_download.html">mx_download()</a></code> function to download a copy of the PDF for each record. Note: downloaded PDFs are named using the value of the <code>ID</code> column in the dataset, which serves as a unique identifier for each record.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
+<p>Pass the results of your search above (<code>results</code>) to the <code><a href="../reference/mx_download.html">mx_download()</a></code> function to download a copy of the PDF for each record.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit">
 
 <span class="fu"><a href="../reference/mx_download.html">mx_download</a></span>(<span class="kw">results</span>,        <span class="co"># Object returned by mx_search</span>
             <span class="st">"pdf/"</span>,         <span class="co"># Directory to save PDFs to </span>
@@ -318,7 +323,7 @@ If the preprint was subsequently published in a peer-reviewed journal, this vari
 <div id="further-guidance" class="section level2">
 <h2 class="hasAnchor">
 <a href="#further-guidance" class="anchor"></a>Further guidance</h2>
-<p>Please see the <em><a href="https://mcguinlu.github.io/medrxivr/articles/building-complex-search-strategies.html">Building complex search strategies</a></em> vignette for extended guidance on developing search strategies for use with <code>medrxivr</code>.</p>
+<p>Please see the <em><a href="https://mcguinlu.github.io/medrxivr/index.html">medrxivr website</a></em> vignette for extended guidance on developing search strategies and for detailed instructions on interacting with the Cold Springs Harbour API for medRxiv and bioRxiv.</p>
 </div>
   </div>
 

@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">medrxivr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2.900</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@
       <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
     </li>
     <li>
-      <a href="../articles/medrxiv-api.html">Interacting with the API</a>
+      <a href="../articles/medrxiv-api.html">Interacting with the Cold Spring Harbour Laboratory API</a>
     </li>
   </ul>
 </li>
@@ -142,7 +142,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <h2 id="section-accessing-medrxiv-biorxiv-data" class="hasAnchor"><a href="#section-accessing-medrxiv-biorxiv-data" class="anchor"></a>Accessing medRxiv/bioRxiv data</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -154,81 +154,72 @@
       <tr>
         
         <td>
-          <p><code><a href="api_link.html">api_link()</a></code> </p>
-        </td>
-        <td><p>Create link for API</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="api_to_df.html">api_to_df()</a></code> </p>
-        </td>
-        <td><p>Convert API data to data frame</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="clean_api_df.html">clean_api_df()</a></code> </p>
-        </td>
-        <td><p>Helper script to clean data from API to make it compatible with mx_search()</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="internet_check.html">internet_check()</a></code> </p>
-        </td>
-        <td><p>Checks whether the user has internet, and returns a helpful message it not.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="medrxivr.html">medrxivr</a></code> </p>
-        </td>
-        <td><p>medrxivr: Accessing medRxiv data from R</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="mx_api_content.html">mx_api_content()</a></code> </p>
         </td>
-        <td><p>Access Cold Springs Harbour API, which serves both medRxiv and bioRxiv</p></td>
+        <td><p>Access medRxiv/bioRxiv data via the Cold Spring Harbour Laboratory API</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="mx_api_doi.html">mx_api_doi()</a></code> </p>
         </td>
-        <td><p>Access medRxiv API, based on single DOI</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mx_crosscheck.html">mx_crosscheck()</a></code> </p>
-        </td>
-        <td><p>Live check against medRxiv</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mx_download.html">mx_download()</a></code> </p>
-        </td>
-        <td><p>Download PDF's</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mx_export.html">mx_export()</a></code> </p>
-        </td>
-        <td><p>Export results of medRxiv search to a .bib file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mx_info.html">mx_info()</a></code> </p>
-        </td>
-        <td><p>Provide information on the snapshot used to perform the search</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mx_search.html">mx_search()</a></code> </p>
-        </td>
-        <td><p>Search medRxiv</p></td>
+        <td><p>Access data on a single medRxiv/bioRxiv record via the Cold Spring Harbour
+Laboratory API</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="mx_snapshot.html">mx_snapshot()</a></code> </p>
         </td>
-        <td><p>Returns formatted snapshot of the medRxiv database for use with mx_search()</p></td>
+        <td><p>Access a static snapshot of the medRxiv repository</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-performing-the-search" class="hasAnchor"><a href="#section-performing-the-search" class="anchor"></a>Performing the search</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="mx_search.html">mx_search()</a></code> </p>
+        </td>
+        <td><p>Search preprint data</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-helper-functions" class="hasAnchor"><a href="#section-helper-functions" class="anchor"></a>Helper functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="mx_crosscheck.html">mx_crosscheck()</a></code> </p>
+        </td>
+        <td><p>Check how up-to-date the maintained medRxiv snapshot is</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mx_download.html">mx_download()</a></code> </p>
+        </td>
+        <td><p>Download PDF's of preprints returned by a search</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="mx_export.html">mx_export()</a></code> </p>
+        </td>
+        <td><p>Export references for preprints returning by a search to a .bib file</p></td>
       </tr>
     </tbody>
     </table>

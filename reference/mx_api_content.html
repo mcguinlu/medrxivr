@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Access Cold Springs Harbour API, which serves both medRxiv and bioRxiv — mx_api_content • medrxivr</title>
+<title>Access medRxiv/bioRxiv data via the Cold Spring Harbour Laboratory API — mx_api_content • medrxivr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Access Cold Springs Harbour API, which serves both medRxiv and bioRxiv — mx_api_content" />
-<meta property="og:description" content="Access Cold Springs Harbour API, which serves both medRxiv and bioRxiv" />
+<meta property="og:title" content="Access medRxiv/bioRxiv data via the Cold Spring Harbour Laboratory API — mx_api_content" />
+<meta property="og:description" content="Provides programmatic access to all preprints available through
+  the Cold Spring Harbour Laboratory API, which serves both the medRxiv and
+  bioRxiv preprint repositories." />
 
 
 
@@ -72,7 +74,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">medrxivr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2.900</span>
       </span>
     </div>
 
@@ -101,7 +103,7 @@
       <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
     </li>
     <li>
-      <a href="../articles/medrxiv-api.html">Interacting with the API</a>
+      <a href="../articles/medrxiv-api.html">Interacting with the Cold Spring Harbour Laboratory API</a>
     </li>
   </ul>
 </li>
@@ -129,13 +131,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Access Cold Springs Harbour API, which serves both medRxiv and bioRxiv</h1>
+    <h1>Access medRxiv/bioRxiv data via the Cold Spring Harbour Laboratory API</h1>
     <small class="dont-index">Source: <a href='https://github.com/mcguinlu/medrxivr/blob/master/R/mx_api.R'><code>R/mx_api.R</code></a></small>
     <div class="hidden name"><code>mx_api_content.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Access Cold Springs Harbour API, which serves both medRxiv and bioRxiv</p>
+    <p>Provides programmatic access to all preprints available through
+  the Cold Spring Harbour Laboratory API, which serves both the medRxiv and
+  bioRxiv preprint repositories.</p>
     </div>
 
     <pre class="usage"><span class='fu'>mx_api_content</span>(
@@ -143,7 +147,7 @@
   to_date = <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>()),
   clean = <span class='fl'>TRUE</span>,
   server = <span class='st'>"medrxiv"</span>,
-  include.info = <span class='fl'>FALSE</span>
+  include_info = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -169,7 +173,7 @@ with other mx_* functions. Default is TRUE.</p></td>
 "biorxiv"</p></td>
     </tr>
     <tr>
-      <th>include.info</th>
+      <th>include_info</th>
       <td><p>Logical, indicating whether to include variables
 containing information returned by the API (e.g. cursor number, total count
 of papers, etc). Default is FALSE.</p></td>

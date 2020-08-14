@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Access medRxiv API, based on single DOI — mx_api_doi • medrxivr</title>
+<title>Access data on a single medRxiv/bioRxiv record via the Cold Spring Harbour
+Laboratory API — mx_api_doi • medrxivr</title>
 
 
 <!-- jquery -->
@@ -39,8 +40,10 @@
 
 
 
-<meta property="og:title" content="Access medRxiv API, based on single DOI — mx_api_doi" />
-<meta property="og:description" content="Access medRxiv API, based on single DOI" />
+<meta property="og:title" content="Access data on a single medRxiv/bioRxiv record via the Cold Spring Harbour
+Laboratory API — mx_api_doi" />
+<meta property="og:description" content="Provides programmatic access to data on a single preprint
+  identified by a unique Digital Object Identifier (DOI)." />
 
 
 
@@ -72,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">medrxivr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2.900</span>
       </span>
     </div>
 
@@ -101,7 +104,7 @@
       <a href="../articles/building-complex-search-strategies.html">Building complex search strategies</a>
     </li>
     <li>
-      <a href="../articles/medrxiv-api.html">Interacting with the API</a>
+      <a href="../articles/medrxiv-api.html">Interacting with the Cold Spring Harbour Laboratory API</a>
     </li>
   </ul>
 </li>
@@ -129,13 +132,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Access medRxiv API, based on single DOI</h1>
+    <h1>Access data on a single medRxiv/bioRxiv record via the Cold Spring Harbour
+Laboratory API</h1>
     <small class="dont-index">Source: <a href='https://github.com/mcguinlu/medrxivr/blob/master/R/mx_api.R'><code>R/mx_api.R</code></a></small>
     <div class="hidden name"><code>mx_api_doi.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Access medRxiv API, based on single DOI</p>
+    <p>Provides programmatic access to data on a single preprint
+  identified by a unique Digital Object Identifier (DOI).</p>
     </div>
 
     <pre class="usage"><span class='fu'>mx_api_doi</span>(<span class='kw'>doi</span>, server = <span class='st'>"medrxiv"</span>, clean = <span class='fl'>TRUE</span>)</pre>
