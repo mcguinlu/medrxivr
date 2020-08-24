@@ -164,8 +164,12 @@
     </tr>
     <tr>
       <th>clean</th>
-      <td><p>Logical, indicating whether to clean the data returned for use
-with other mx_* functions. Default is TRUE.</p></td>
+      <td><p>Logical, defaulting to TRUE, indicating whether to clean the
+data returned by the API. If TRUE, variables containing absolute paths to
+the preprints web-page ("link_page") and PDF ("link_pdf") are generated
+from the "server", "DOI", and "version" variables returned by the API. The
+"title", "abstract" and "authors" variables are converted to title case.
+Finally, the "type" and "server" variables are dropped.</p></td>
     </tr>
     <tr>
       <th>server</th>
@@ -175,8 +179,8 @@ with other mx_* functions. Default is TRUE.</p></td>
     <tr>
       <th>include_info</th>
       <td><p>Logical, indicating whether to include variables
-containing information returned by the API (e.g. cursor number, total count
-of papers, etc). Default is FALSE.</p></td>
+containing information returned by the API (e.g. API status, cursor number,
+total count of papers, etc). Default is FALSE.</p></td>
     </tr>
     </table>
 

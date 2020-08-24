@@ -91,7 +91,7 @@
       <h1 data-toc-skip>Interacting with the Cold Spring Harbour Laboratory API</h1>
                         <h4 class="author">Luke A McGuinness</h4>
             
-            <h4 class="date">2020-08-14</h4>
+            <h4 class="date">2020-08-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mcguinlu/medrxivr/blob/master/vignettes/medrxiv-api.Rmd"><code>vignettes/medrxiv-api.Rmd</code></a></small>
       <div class="hidden name"><code>medrxiv-api.Rmd</code></div>
@@ -127,14 +127,40 @@
 <a href="#by-doi-mx_api_doi" class="anchor"></a>By DOI (<code>mx_api_doi()</code>)</h3>
 <p><a href="https://api.biorxiv.org/details/%5Bserver%5D/%5BDOI%5D" class="uri">https://api.biorxiv.org/details/[server]/[DOI]</a> returns detail for a single manuscript. For instance, <a href="https://api.biorxiv.org/details/medrxiv/10.1101/2020.02.25.20021568" class="uri">https://api.biorxiv.org/details/medrxiv/10.1101/2020.02.25.20021568</a> will output metadata for the medRxiv paper with DOI 10.1101/2020.02.25.20021568. To import the results from this endpoint into R as a dataframe:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">medrxiv_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_api_doi.html">mx_api_doi</a></span>(doi = <span class="st">"10.1101/2020.02.25.20021568"</span>)
+<span class="fu"><a href="../reference/mx_api_doi.html">mx_api_doi</a></span>(doi = <span class="st">"10.1101/2020.02.25.20021568"</span>)
+<span class="co">#&gt; # A tibble: 2 x 14</span>
+<span class="co">#&gt;   doi   title authors author_correspo… author_correspo… date  version license</span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  </span>
+<span class="co">#&gt; 1 10.1… Deep… Chen, … Honggang Yu      Renmin Hospital… 2020… 1       cc_by_…</span>
+<span class="co">#&gt; 2 10.1… Deep… Chen, … Honggang Yu      Renmin Hospital… 2020… 2       cc_by_…</span>
+<span class="co">#&gt; # … with 6 more variables: category &lt;chr&gt;, abstract &lt;chr&gt;, published &lt;lgl&gt;,</span>
+<span class="co">#&gt; #   node &lt;int&gt;, link_page &lt;chr&gt;, link_pdf &lt;chr&gt;</span>
 </pre></div>
 </div>
 </div>
-<div id="notes" class="section level2">
+<div id="accessing-the-raw-api-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#notes" class="anchor"></a>Notes</h2>
-<p>Both functions contain a <code>clean</code> argument with is set to <code>TRUE</code> by default. This is to ensure that the datasets returned by the <code>mx_api_*()</code> functions can immediately be passed to <code>mc_search()</code>. However, there may be occasions where this is not required, and so setting this argument to <code>FALSE</code> will return the raw data provided by the API endpoints.</p>
+<a href="#accessing-the-raw-api-data" class="anchor"></a>Accessing the raw API data</h2>
+<p>Both functions contain a <code>clean</code> argument with is set to <code>TRUE</code> by default. This is to ensure that the datasets returned by the <code>mx_api_*()</code> functions can immediately be passed to <code><a href="../reference/mx_search.html">mx_search()</a></code>. However, there may be occasions where this is not required, and so setting this argument to <code>FALSE</code> will return the raw data provided by the API endpoints. For example:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/mx_api_content.html">mx_api_content</a></span>(to_date = <span class="st">"2019-07-01"</span>, clean = <span class="fl">TRUE</span>)
+<span class="co">#&gt; Total number of records found: 32</span>
+<span class="co">#&gt; # A tibble: 32 x 14</span>
+<span class="co">#&gt;    doi   title authors author_correspo… author_correspo… date  version license</span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  </span>
+<span class="co">#&gt;  1 10.1… Mole… Daniel… Robert Castelo   "Department of … 2019… 1       cc_by  </span>
+<span class="co">#&gt;  2 10.1… Croh… Orna G… Orna G Ehrlich   "Crohn\\'s &amp; Co… 2019… 1       cc_by_…</span>
+<span class="co">#&gt;  3 10.1… Upda… Joshua… Joshua D Wallach "Yale School of… 2019… 1       cc_by_…</span>
+<span class="co">#&gt;  4 10.1… Pred… Oliver… Olivera Stojano… "Institute of C… 2019… 1       cc_by  </span>
+<span class="co">#&gt;  5 10.1… Pros… Nathan… Nathan Brajer    "Duke Universit… 2019… 1       cc_by_…</span>
+<span class="co">#&gt;  6 10.1… Tren… Brian … Ben Goldacre     "University of … 2019… 1       cc_by  </span>
+<span class="co">#&gt;  7 10.1… 18F-… Nicola… Nicolas Nicastro "University of … 2019… 1       cc_by_…</span>
+<span class="co">#&gt;  8 10.1… Perc… Sistan… Lena H Ting      "Emory Universi… 2019… 1       cc_by  </span>
+<span class="co">#&gt;  9 10.1… Prox… Tesfa … Tesfa Dejenie H… "Department of … 2019… 1       cc_by_…</span>
+<span class="co">#&gt; 10 10.1… Tran… Alexan… Alexandre Vivot  "APHP"           2019… 1       cc_no  </span>
+<span class="co">#&gt; # … with 22 more rows, and 6 more variables: category &lt;chr&gt;, abstract &lt;chr&gt;,</span>
+<span class="co">#&gt; #   published &lt;chr&gt;, node &lt;int&gt;, link_page &lt;chr&gt;, link_pdf &lt;chr&gt;</span>
+</pre></div>
 </div>
   </div>
 

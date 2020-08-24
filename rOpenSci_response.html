@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reviewer 1 (@tts) • medrxivr</title>
+<title>NA • medrxivr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Reviewer 1 (@tts)" />
+<meta property="og:title" content="NA" />
 
 
 
@@ -128,52 +128,21 @@
 <div class="row">
   <div class="contents col-md-9">
     <div class="page-header">
-      <h1>Reviewer 1 (@tts)</h1>
+      <h1>NA</h1>
     </div>
 
 
+<p><strong>I wonder if the returned data frames from the mx_api_* family could be also represented as tibbles?</strong></p>
 <ul>
-<li><p><strong>ml3: <code><a href="https://docs.ropensci.org/spelling/reference/spell_check_package.html">spelling::spell_check_package()</a></code> still shows some unknown words. Please update your words list and consider automating the process with <code>usethis::use_spell_check()</code>.</strong> I have automated the spellcheck now as recommended.</p></li>
-<li><p><strong>ml4: <code>goodpractice::gp()</code> still suggests some improvements.</strong> I have addressed all issues raised, and <code>goodpractice::gp()</code> now does not recommend any further improvements.</p></li>
-<li><p><strong>ml5: <code><a href="http://covr.r-lib.org/reference/package_coverage.html">covr::package_coverage()</a></code> shows greater coverage than before; thanks. The only file that’s still a little low is R/mx_crosscheck.R. Please consider adding more tests or excluding code as necessary (<a href="https://github.com/r-lib/covr#exclusions" class="uri">https://github.com/r-lib/covr#exclusions</a>).</strong> I have added more tests to increase the coverage, and where it is not possible to test the error handling behaviour (e.g. because it’s not possible to simulate the user not having an internet connection or the API returning a specific message), I have excluded lines as needed. The skipped lines are all marked with a <code>#nocov</code> comment, so can be readily found for inspection. I’ve included the output of my local run of <code><a href="http://covr.r-lib.org/reference/package_coverage.html">covr::package_coverage()</a></code> below:</p></li>
+<li>The package now returns tibbles across the board. I had never really understood the difference, but after a bit of research, I do prefer the printing defaults for <code>tibble</code> objects.</li>
 </ul>
-<pre><code>medrxivr Coverage: 100.00%
-R/helpers.R: 100.00%
-R/mx_api.R: 100.00%
-R/mx_crosscheck.R: 100.00%
-R/mx_download.R: 100.00%
-R/mx_export.R: 100.00%
-R/mx_info.R: 100.00%
-R/mx_search.R: 100.00%
-R/mx_snapshot.R: 100.00%</code></pre>
+<p><strong>The package does a good job in parsing and cleaning preprint metadata. Unfortunately, I cannot find documentation or an example showcasing what is actually returned. Can you provide one reproducible example in the README and/or extend the documentation in the function docs?</strong></p>
 <ul>
-<li><p><strong>ml6: <code>usethis::use_tidy_style()</code> suggests some files could improve. Please run <code>usethis::use_tidy_style()</code> and consider committing the changes.</strong> I have run this and commited the changes.</p></li>
-<li><p><strong>ml7: On the website, the Reference tab shows “All functions”. Maybe you can help users navigate this reference by grouping functions in some meaningful way? (see <a href="https://pkgdown.r-lib.org/reference/build_reference.html" class="uri">https://pkgdown.r-lib.org/reference/build_reference.html</a>).</strong> I had added keywords to the functions already, but hadn’t realised that you needed to alter the <code>_pkgdown.yml</code> file in order to group the functions. This has now been implemented, and functions are grouped into three categories: “Accessing medRxiv/bioRxiv data”, “Performing the search”, and “Helper functions”.</p></li>
-<li><p><strong>ml8: You may want to consider setting up a CI services for a wider range of environments. Here are two workflows you may use – <a href="https://usethis.r-lib.org/reference/use_github_action.html#use-github-action-check-standard-">standard</a>, and <a href="https://usethis.r-lib.org/reference/use_github_action.html#use-github-action-check-full-">full</a>.</strong> Thanks for the recommendation - I have gone with the standard workflow, and R CMD passes in all environments.</p></li>
-<li>
-<p><strong>ml9: I see three .Rmd files inside vignettes/ but only two in the Articles section of the website. Is this intentional? Also, vignettes are great, but they can make the installation heavier. Consider the <a href="https://usethis.r-lib.org/reference/use_vignette.html">difference between <code>use_vignette()</code> and <code>use_article()</code></a>.</strong> Yes, this is intentional. When you include a <code>.Rmd</code> file with the same name as the package in the <code>vignette/</code> folder, <code>pkgdown</code> treats this as a special type of vignette (“Get Started”). From the <code>pkgdown</code> website:</p>
-<blockquote>
-<p>A vignette with the same name as the package (e.g., vignettes/pkgdown.Rmd or vignettes/articles/pkgdown.Rmd) automatically becomes a top-level “Get started” link, and will not appear in the articles drop-down. (If your package name include a ., e.g. pack.down, use a - in the vignette name, e.g. pack.down.Rmd.)</p>
-</blockquote>
-<p>I have also taken your advice and converted the two vignettes covering advanced topics to articles, and signposted to them in the final introductory vignette.</p>
-</li>
-<li>
-<p><strong>ml10: I recommend walking through the steps listed by <a href="https://usethis.r-lib.org/reference/use_release_issue.html"><code>use_release_issue()</code></a> or <a href="https://devtools.r-lib.org/reference/release.html"><code>devtools::release()</code></a>. Even if you don’t submit to CRAN, walking through the process can help you find details to improve.</strong> As a result of this process, the following changes were made:</p>
-<ul>
-<li>
-<code>xml2</code> was removed from the <code>DESCRIPTION</code> as it is now longer needed now that the package does not perform any web-scraping.</li>
-<li>Titles of some of the functions were edited to be more comprehensive, so that the <code>pkgdown</code> function list is more useful.</li>
-<li>README.html was removed from the top level directory.</li>
+<li>Hoping I understood this ask correctly, there is now a section in the README that desribes how to access the raw, uncleaned API data using the <code>mx_api_*()</code> functions, which also points to a section in the <a href="https://mcguinlu.github.io/medrxivr/articles/medrxiv-api.html#accesing-the-raw-api-data">API article</a> on the <code>pkgdown</code> website that provides more detail and an example of the uncleaned output. In addition, a clearer description of what the cleaning process entails has been included in the documention of the <code>mx_api_*()</code> functions (e.g. <a href="https://mcguinlu.github.io/medrxivr/reference/mx_api_content.html">here</a>)</li>
 </ul>
-</li>
-<li><p>*ml11: The vignettes show code but not output. Reproducible examples are most useful when they include the output because readers can understand what the code does even if they choose not to run the code themselves. This is why <code>reprex::reprex()</code> prints output (<a href="https://reprex.tidyverse.org/" class="uri">https://reprex.tidyverse.org/</a>).<strong> Thanks for this feedback. I have decided not to produce output for the one remaining vignette, as the example code in this vignette calls the API via <code><a href="reference/mx_api_content.html">mx_api_content()</a></code>. I am worried that enabling evalutation of the code in this vignette would mean that it would take a long time to render and make installing the package slow. However, for the two new articles (converted from vignettes as per </strong>ml9**, and included only in the pkgdown website), the output is now shown.</p></li>
-</ul>
-<div id="reviewer-1-tts" class="section level1">
-
-<p>Glad to hear things are a bit clearer now!</p>
-<p>The reason <code><a href="reference/mx_info.html">mx_info()</a></code> is not found is that it is an internal function (<code>medrxivr:::mx_info()</code>) and should not have been available in the function list on the <code>pkgdown</code> website. I had marked several internal function with the “Internal” keyword, which should have hidden them, but it seems that <code>pkgdown</code> is case sensitive and the correct keyword is “internal”. This has been corrected now and the internal functions now longer appear in the website’s function list.</p>
-<p>Finally, just wanted to confirm that your details in the DESCRIPTION are correct?</p>
-</div>
+<p><strong>In the function docs of mx_export(), it says Dataframe returned by mx_search(), but I realised that also data obtained from the mx_api_ family can be exported as bib file using mx_export().</strong> Thanks for this - I have updated the docs for the <code><a href="reference/mx_export.html">mx_export()</a></code> function to read <code>@param data Dataframe returned by mx_search() or mx_api_*() functions</code></p>
+<p>@maurolepore, I have checked that my changes doen’t throw any new errors, re-run <code>styler</code>/<code>spelling</code> and commited any changes, and checked <code>goodpractice</code> doesn’t recommend any changes.</p>
+<p>Hoping we are nearly there!</p>
 
 
   </div>
