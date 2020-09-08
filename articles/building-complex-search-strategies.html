@@ -91,7 +91,7 @@
       <h1 data-toc-skip>Building complex search strategies</h1>
                         <h4 class="author">Luke A McGuinness</h4>
             
-            <h4 class="date">2020-08-24</h4>
+            <h4 class="date">2020-09-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mcguinlu/medrxivr/blob/master/vignettes/building-complex-search-strategies.Rmd"><code>vignettes/building-complex-search-strategies.Rmd</code></a></small>
       <div class="hidden name"><code>building-complex-search-strategies.Rmd</code></div>
@@ -113,8 +113,8 @@
 
 <span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),     <span class="co"># Use daily snapshot for data</span>
                         query = <span class="kw">myquery</span>)
-<span class="co">#&gt; Using medRxiv snapshot - 2020-08-24 10:27</span>
-<span class="co">#&gt; Found 644 record(s) matching your search.</span>
+<span class="co">#&gt; Using medRxiv snapshot - 2020-09-08 00:26</span>
+<span class="co">#&gt; Found 686 record(s) matching your search.</span>
 </pre></div>
 <p>To find records relevant to more than one topic domain, create a vector for each topic (note: there is no upper limit on the number of topics your can have) and combine these vectors into a list which is then passed to the <code><a href="../reference/mx_search.html">mx_search()</a></code> function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
@@ -124,8 +124,8 @@
 
 <span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
                         query = <span class="kw">myquery</span>)
-<span class="co">#&gt; Using medRxiv snapshot - 2020-08-24 10:27</span>
-<span class="co">#&gt; Found 38 record(s) matching your search.</span>
+<span class="co">#&gt; Using medRxiv snapshot - 2020-09-08 00:26</span>
+<span class="co">#&gt; Found 41 record(s) matching your search.</span>
 </pre></div>
 </div>
 <div id="additional-filters-and-options" class="section level2">
@@ -141,14 +141,14 @@
 <span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
                         query = <span class="st">"dementia"</span>,
                         fields = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"title"</span>,<span class="st">"abstract"</span>))
-<span class="co">#&gt; Using medRxiv snapshot - 2020-08-24 10:27</span>
-<span class="co">#&gt; Found 107 record(s) matching your search.</span>
+<span class="co">#&gt; Using medRxiv snapshot - 2020-09-08 00:26</span>
+<span class="co">#&gt; Found 112 record(s) matching your search.</span>
 
 <span class="co"># Search by DOI</span>
 <span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
                         query = <span class="st">"10.1101/2020.01.30.20019836"</span>,
                         fields = <span class="st">"link"</span>)
-<span class="co">#&gt; Using medRxiv snapshot - 2020-08-24 10:27</span>
+<span class="co">#&gt; Using medRxiv snapshot - 2020-09-08 00:26</span>
 <span class="co">#&gt; Found 1 record(s) matching your search.</span>
 </pre></div>
 </div>
@@ -160,8 +160,8 @@
 <span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
                         query = <span class="st">"dementia"</span>,
                         NOT = <span class="st">"[Mm]ild cognitive impairment"</span>)
-<span class="co">#&gt; Using medRxiv snapshot - 2020-08-24 10:27</span>
-<span class="co">#&gt; Found 92 record(s) matching your search.</span>
+<span class="co">#&gt; Using medRxiv snapshot - 2020-09-08 00:26</span>
+<span class="co">#&gt; Found 96 record(s) matching your search.</span>
 </pre></div>
 </div>
 <div id="limit-by-date-posted" class="section level3">
@@ -173,7 +173,7 @@
                         query = <span class="st">"dementia"</span>,
                         from_date = <span class="st">"2020-01-01"</span>,      <span class="co"># 1st Jan 2020</span>
                         to_date = <span class="st">"2020-01-08"</span>)        <span class="co"># 8th Jan 2020</span>
-<span class="co">#&gt; Using medRxiv snapshot - 2020-08-24 10:27</span>
+<span class="co">#&gt; Using medRxiv snapshot - 2020-09-08 00:26</span>
 <span class="co">#&gt; Found 1 record(s) matching your search.</span>
 </pre></div>
 </div>
@@ -186,7 +186,7 @@
                         query = <span class="st">"10.1101/2020.01.30.20019836"</span>,
                         fields = <span class="st">"link"</span>,
                         deduplicate = <span class="fl">FALSE</span>)
-<span class="co">#&gt; Using medRxiv snapshot - 2020-08-24 10:27</span>
+<span class="co">#&gt; Using medRxiv snapshot - 2020-09-08 00:26</span>
 <span class="co">#&gt; Found 4 record(s) matching your search.</span>
 <span class="co">#&gt; Note, there may be &gt;1 version of the same record.</span>
 </pre></div>
@@ -222,8 +222,8 @@
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="kw">mx_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mx_search.html">mx_search</a></span>(data = <span class="fu"><a href="../reference/mx_snapshot.html">mx_snapshot</a></span>(),
                         query = <span class="st">"[Mm]endelian(\\s)([[:graph:]]+\\s){0,4}randomi([[:alpha:]])ation"</span>)
-<span class="co">#&gt; Using medRxiv snapshot - 2020-08-24 10:27</span>
-<span class="co">#&gt; Found 108 record(s) matching your search.</span>
+<span class="co">#&gt; Using medRxiv snapshot - 2020-09-08 00:26</span>
+<span class="co">#&gt; Found 119 record(s) matching your search.</span>
 </pre></div>
 </div>
 <div id="regex-tester" class="section level3">
@@ -249,7 +249,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.9000.</p>
 </div>
 
       </footer>
