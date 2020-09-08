@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NA • medrxivr</title>
+<title>CONTRIBUTING • medrxivr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="NA" />
+<meta property="og:title" content="CONTRIBUTING" />
 
 
 
@@ -128,22 +128,74 @@
 <div class="row">
   <div class="contents col-md-9">
     <div class="page-header">
-      <h1>NA</h1>
+      <h1>CONTRIBUTING</h1>
     </div>
 
+<div id="contributing" class="section level1">
 
-<p><strong>I wonder if the returned data frames from the mx_api_* family could be also represented as tibbles?</strong></p>
+<div id="fixing-typos" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fixing-typos" class="anchor"></a>Fixing typos</h3>
+<p>Small typos or grammatical errors in documentation may be edited directly using the GitHub web interface, so long as the changes are made in the <em>source</em> file.</p>
 <ul>
-<li>The package now returns tibbles across the board. I had never really understood the difference, but after a bit of research, I do prefer the printing defaults for <code>tibble</code> objects.</li>
+<li>YES: you edit a roxygen comment in a <code>.R</code> file below <code>R/</code>.</li>
+<li>NO: you edit an <code>.Rd</code> file below <code>man/</code>.</li>
 </ul>
-<p><strong>The package does a good job in parsing and cleaning preprint metadata. Unfortunately, I cannot find documentation or an example showcasing what is actually returned. Can you provide one reproducible example in the README and/or extend the documentation in the function docs?</strong></p>
+</div>
+<div id="prerequisites" class="section level3">
+<h3 class="hasAnchor">
+<a href="#prerequisites" class="anchor"></a>Prerequisites</h3>
+<p>Before you make a substantial pull request, you should always file an issue and make sure someone from the team agrees that it’s a problem. If you’ve found a bug, create an associated issue and illustrate the bug with a minimal <a href="https://www.tidyverse.org/help/#reprex">reprex</a>.</p>
+</div>
+<div id="pull-request-process" class="section level3">
+<h3 class="hasAnchor">
+<a href="#pull-request-process" class="anchor"></a>Pull request process</h3>
 <ul>
-<li>Hoping I understood this ask correctly, there is now a section in the README that desribes how to access the raw, uncleaned API data using the <code>mx_api_*()</code> functions, which also points to a section in the <a href="https://mcguinlu.github.io/medrxivr/articles/medrxiv-api.html#accesing-the-raw-api-data">API article</a> on the <code>pkgdown</code> website that provides more detail and an example of the uncleaned output. In addition, a clearer description of what the cleaning process entails has been included in the documention of the <code>mx_api_*()</code> functions (e.g. <a href="https://mcguinlu.github.io/medrxivr/reference/mx_api_content.html">here</a>)</li>
+<li>We recommend that you create a Git branch for each pull request (PR).<br>
+</li>
+<li>Look at the Travis and AppVeyor build status before and after making changes. The <code>README</code> should contain badges for any continuous integration services used by the package.<br>
+</li>
+<li>We recommend the tidyverse <a href="http://style.tidyverse.org">style guide</a>. You can use the <a href="https://CRAN.R-project.org/package=styler">styler</a> package to apply these styles, but please don’t restyle code that has nothing to do with your PR.<br>
+</li>
+<li>We use <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a>.<br>
+</li>
+<li>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>. Contributions with test cases included are easier to accept.<br>
+</li>
+<li>For user-facing changes, add a bullet to the top of <code>NEWS.md</code> below the current development version header describing the changes made followed by your GitHub username, and links to relevant issue(s)/PR(s).</li>
 </ul>
-<p><strong>In the function docs of mx_export(), it says Dataframe returned by mx_search(), but I realised that also data obtained from the mx_api_ family can be exported as bib file using mx_export().</strong> Thanks for this - I have updated the docs for the <code><a href="reference/mx_export.html">mx_export()</a></code> function to read <code>@param data Dataframe returned by mx_search() or mx_api_*() functions</code></p>
-<p>@maurolepore, I have checked that my changes doen’t throw any new errors, re-run <code>styler</code>/<code>spelling</code> and commited any changes, and checked <code>goodpractice</code> doesn’t recommend any changes.</p>
-<p>Hoping we are nearly there!</p>
-
+</div>
+<div id="code-of-conduct" class="section level3">
+<h3 class="hasAnchor">
+<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h3>
+<p>Please note that the medrxivr project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project you agree to abide by its terms.</p>
+</div>
+<div id="see-ropensci-contributing-guide" class="section level3">
+<h3 class="hasAnchor">
+<a href="#see-ropensci-contributing-guide" class="anchor"></a>See rOpenSci <a href="https://devguide.ropensci.org/contributingguide.html">contributing guide</a>
+</h3>
+<p>for further details.</p>
+</div>
+<div id="discussion-forum" class="section level3">
+<h3 class="hasAnchor">
+<a href="#discussion-forum" class="anchor"></a>Discussion forum</h3>
+<p>Check out our <a href="https://discuss.ropensci.org">discussion forum</a> if</p>
+<ul>
+<li>you have a question, an use case, or otherwise not a bug or feature request for the software itself.</li>
+<li>you think your issue requires a longer form discussion.</li>
+</ul>
+</div>
+<div id="prefer-to-email" class="section level3">
+<h3 class="hasAnchor">
+<a href="#prefer-to-email" class="anchor"></a>Prefer to Email?</h3>
+<p>Email the person listed as maintainer in the <code>DESCRIPTION</code> file of this repo.</p>
+<p>Though note that private discussions over email don’t help others - of course email is totally warranted if it’s a sensitive problem of any kind.</p>
+</div>
+<div id="thanks-for-contributing" class="section level3">
+<h3 class="hasAnchor">
+<a href="#thanks-for-contributing" class="anchor"></a>Thanks for contributing!</h3>
+<p>This contributing guide is adapted from the tidyverse contributing guide available at <a href="https://raw.githubusercontent.com/r-lib/usethis/master/inst/templates/tidy-contributing.md" class="uri">https://raw.githubusercontent.com/r-lib/usethis/master/inst/templates/tidy-contributing.md</a></p>
+</div>
+</div>
 
   </div>
 
