@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">medrxivr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2.900</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -132,6 +132,29 @@
       <small>Source: <a href='https://github.com/ropensci/medrxivr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="medrxivr-003" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.3">
+<a href="#medrxivr-003" class="anchor"></a>medrxivr 0.0.3</h1>
+<p>Version created for submission to JOSS and CRAN, and onboarded to rOpenSci following peer-review.</p>
+<p>Major changes:</p>
+<ul>
+<li>
+<code><a href="../reference/mx_snapshot.html">mx_snapshot()</a></code> now takes a <code>commit</code> argument, allowing you to specify exactly which snapshot of the database you would like to use. Details on the commit keys needed are <a href="https://github.com/mcguinlu/medrxivr-data/commits/master/snapshot.csv">here</a>. In addition, the process of taking the snapshot is now managed by GitHub actions, meaning it should be a lot more robust/regular/</li>
+<li>Importing the snapshot to R is now significantly faster, as <code><a href="https://vroom.r-lib.org/reference/vroom.html">vroom::vroom()</a></code> is used in place of <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>
+</li>
+<li>All functions that return a data frame now return ungrouped tibbles.</li>
+<li>The to/from date arguments for both <code><a href="../reference/mx_search.html">mx_search()</a></code> and <code><a href="../reference/mx_api_content.html">mx_api_content()</a></code> have been standardized to snake case and now expect the same “YYYY-MM-DD” character format.</li>
+<li>A progress indicator has been added to <code><a href="../reference/mx_api_content.html">mx_api_content()</a></code> provide useful information when downloading from the API.</li>
+<li>Some refactoring of code has taken place to reduce duplication of code chunks and to make future maintenance easier.</li>
+</ul>
+<p>Minor changes:</p>
+<ul>
+<li>
+<code><a href="../reference/mx_crosscheck.html">mx_crosscheck()</a></code> no longer uses web-scraping when providing the number of</li>
+<li>Documentation has been updated to reflect the changes, and some additional sections added to the vignettes. This includes removing references to older versions of the functions names (e.g. <code>mx_raw()</code>).</li>
+<li>Additional test have been written, and the overall test coverage has been increased. Some lines (handling exceptional rare errors that can’t be mocked) have been marked as <code>#nocov</code>.</li>
+</ul>
+</div>
     <div id="medrxivr-002" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.2">
 <a href="#medrxivr-002" class="anchor"></a>medrxivr 0.0.2</h1>
